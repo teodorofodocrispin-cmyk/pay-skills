@@ -49,11 +49,20 @@
                   },
                   "context": {
                     "type": "string",
-                    "enum": ["general", "legal", "financial", "medical", "code"],
+                    "enum": [
+                      "general",
+                      "legal",
+                      "financial",
+                      "medical",
+                      "code"
+                    ],
                     "description": "Domain context for specialized redaction rules.",
                     "default": "general"
                   }
-                }
+                },
+                "required": [
+                  "text"
+                ]
               }
             }
           }
@@ -83,7 +92,12 @@
                         },
                         "risk_category": {
                           "type": "string",
-                          "enum": ["CLEAN", "SENSITIVE", "PRIVATE", "CRITICAL"],
+                          "enum": [
+                            "CLEAN",
+                            "SENSITIVE",
+                            "PRIVATE",
+                            "CRITICAL"
+                          ],
                           "example": "PRIVATE"
                         },
                         "entities_removed": {
@@ -95,9 +109,19 @@
                           "items": {
                             "type": "object",
                             "properties": {
-                              "type": {"type": "string", "example": "email"},
-                              "category": {"type": "string", "example": "PRIVATE"},
-                              "redacted_text": {"type": "string", "example": "john@example.com"}
+                              "type": {
+                                "type": "string",
+                                "example": "email"
+                              },
+                              "category": {
+                                "type": "string",
+                                "example": "PRIVATE"
+                              },
+                              "redacted_text": {
+                                "type": "string",
+                                "example": "[original-value-redacted-from-response-logs]",
+                                "description": "Original value that was redacted. WARNING: contains raw PII — do not log this field for EU AI Act audit compliance. Store only sanitized_content."
+                              }
                             }
                           }
                         },
@@ -109,15 +133,25 @@
                           "type": "object",
                           "description": "Solana anchor — paid requests only",
                           "properties": {
-                            "solana_tx": {"type": "string"},
-                            "verify_url": {"type": "string"}
+                            "solana_tx": {
+                              "type": "string"
+                            },
+                            "verify_url": {
+                              "type": "string"
+                            }
                           }
                         },
                         "usage_metrics": {
                           "type": "object",
                           "properties": {
-                            "quota_remaining": {"type": "integer", "example": 49},
-                            "quota_limit": {"type": "integer", "example": 50}
+                            "quota_remaining": {
+                              "type": "integer",
+                              "example": 49
+                            },
+                            "quota_limit": {
+                              "type": "integer",
+                              "example": 50
+                            }
                           }
                         }
                       }
@@ -134,8 +168,13 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "status": {"type": "string", "example": "payment_required"},
-                    "x402": {"type": "object"}
+                    "status": {
+                      "type": "string",
+                      "example": "payment_required"
+                    },
+                    "x402": {
+                      "type": "object"
+                    }
                   }
                 }
               }
@@ -152,7 +191,9 @@
             "headers": {
               "PAYMENT-REQUIRED": {
                 "description": "Base64-encoded x402 v2 payment requirements",
-                "schema": {"type": "string"}
+                "schema": {
+                  "type": "string"
+                }
               }
             }
           }
@@ -193,11 +234,26 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "sanitized_content": {"type": "string", "example": "My email is [REDACTED]"},
-                    "safety_score": {"type": "number", "example": 0.2},
-                    "risk_category": {"type": "string", "example": "PRIVATE"},
-                    "demo": {"type": "boolean", "example": true},
-                    "requests_remaining": {"type": "integer", "example": 2}
+                    "sanitized_content": {
+                      "type": "string",
+                      "example": "My email is [REDACTED]"
+                    },
+                    "safety_score": {
+                      "type": "number",
+                      "example": 0.2
+                    },
+                    "risk_category": {
+                      "type": "string",
+                      "example": "PRIVATE"
+                    },
+                    "demo": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "requests_remaining": {
+                      "type": "integer",
+                      "example": 2
+                    }
                   }
                 }
               }
@@ -220,7 +276,9 @@
             "name": "wallet_address",
             "in": "path",
             "required": true,
-            "schema": {"type": "string"},
+            "schema": {
+              "type": "string"
+            },
             "example": "your-agent-wallet"
           }
         ],
@@ -232,8 +290,14 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "trust_tier": {"type": "string", "example": "ACTIVE"},
-                    "trustboost_score": {"type": "number", "example": 0.74}
+                    "trust_tier": {
+                      "type": "string",
+                      "example": "ACTIVE"
+                    },
+                    "trustboost_score": {
+                      "type": "number",
+                      "example": 0.74
+                    }
                   }
                 }
               }
@@ -256,7 +320,9 @@
             "name": "anchor_tx",
             "in": "path",
             "required": true,
-            "schema": {"type": "string"},
+            "schema": {
+              "type": "string"
+            },
             "example": "solana-tx-signature"
           }
         ],
@@ -268,8 +334,13 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "status": {"type": "string", "example": "verified"},
-                    "proof": {"type": "object"}
+                    "status": {
+                      "type": "string",
+                      "example": "verified"
+                    },
+                    "proof": {
+                      "type": "object"
+                    }
                   }
                 }
               }
@@ -295,8 +366,14 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "status": {"type": "string", "example": "ok"},
-                    "version": {"type": "string", "example": "2.6.0"}
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "version": {
+                      "type": "string",
+                      "example": "2.6.0"
+                    }
                   }
                 }
               }
