@@ -203,7 +203,7 @@
     "/sanitize/preview": {
       "post": {
         "summary": "Free PII preview — no wallet required",
-        "description": "3 free sanitizations per IP per hour. Max 500 chars. No tx_hash or wallet required.",
+        "description": "3 free sanitizations per IP per hour. Max 500 chars. No tx_hash or wallet required. Response is a flat object (no data wrapper) — see POST /sanitize for the full paid envelope.",
         "x-pay": {
           "price": 0,
           "currency": "USDC",
