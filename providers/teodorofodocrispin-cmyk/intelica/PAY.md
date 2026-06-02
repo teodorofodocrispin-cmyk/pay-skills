@@ -6,7 +6,7 @@ use_case: "Use when an AI agent needs to analyze a competitor, evaluate market p
 category: ai_ml
 service_url: https://intelica.onrender.com
 openapi:
-  url: https://intelica.onrender.com/openapi.json
+  path: openapi.json
 ---
 
 Intelica is a pay-per-call competitive intelligence API designed for autonomous AI agents. It accepts a URL or text description of any product or company and returns a structured JSON analysis with:
