@@ -1,1 +1,937 @@
-{"openapi":"3.1.0","info":{"title":"Intelica","description":"Competitive intelligence API \u2014 pay-per-call via x402","version":"4.5.0"},"paths":{"/llms.txt":{"get":{"summary":"Fetch llms.txt discovery file for LLM and agent integration","description":"Standard llms.txt for LLM and agent discovery.","operationId":"llms_txt_llms_txt_get","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}}}}},"/health":{"get":{"summary":"Fetch service health and cache statistics","operationId":"health_health_get","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}}}}},"/":{"get":{"summary":"Fetch Intelica API overview and available endpoints","operationId":"root__get","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}}}}},"/.well-known/x402":{"get":{"summary":"Fetch x402 payment manifest with Base and Solana options","operationId":"x402_manifest__well_known_x402_get","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}}}}},"/.well-known/x402.json":{"get":{"summary":"Fetch x402 payment manifest with Base and Solana options","operationId":"x402_manifest__well_known_x402_json_get","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}}}}},"/pricing":{"get":{"summary":"Fetch pricing details for all Intelica endpoints","operationId":"pricing_pricing_get","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}}}}},"/mcp":{"get":{"summary":"Fetch MCP server info and available tools","operationId":"mcp_info_mcp_get","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}}}},"post":{"summary":"Execute MCP JSON-RPC tool call for competitive intelligence","description":"MCP server \u2014 JSON-RPC 2.0.","operationId":"mcp_endpoint_mcp_post","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/MCPRequest"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/mcp-server-card.json":{"get":{"summary":"Fetch Intelica agent card for MCP server discovery","operationId":"agent_card_mcp_server_card_json_get","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}}}}},"/agent-card.json":{"get":{"summary":"Fetch Intelica agent card for MCP server discovery","operationId":"agent_card_agent_card_json_get","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}}}}},"/mcp/agentcard.json":{"get":{"summary":"Fetch Intelica agent card for MCP server discovery","operationId":"agent_card_mcp_agentcard_json_get","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}}}}},"/.well-known/agent-registration.json":{"get":{"summary":"Fetch agent registration metadata for discovery","operationId":"agent_registration__well_known_agent_registration_json_get","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}}}}},"/x402/discovery/resources":{"get":{"summary":"Fetch Bazaar-compatible discovery catalog for x402 agents","description":"Bazaar-compatible discovery endpoint for x402 agent indexers.","operationId":"discovery_resources_x402_discovery_resources_get","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}}}}},"/.well-known/x402/discovery/resources":{"get":{"summary":"Fetch Bazaar-compatible discovery catalog for x402 agents","description":"Bazaar-compatible discovery endpoint for x402 agent indexers.","operationId":"discovery_resources__well_known_x402_discovery_resources_get","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}}}}},"/v2/x402/discovery/resources":{"get":{"summary":"Fetch Bazaar-compatible discovery catalog for x402 agents","description":"Bazaar-compatible discovery endpoint for x402 agent indexers.","operationId":"discovery_resources_v2_x402_discovery_resources_get","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}}}}},"/v1/x402/discovery/resources":{"get":{"summary":"Fetch Bazaar-compatible discovery catalog for x402 agents","description":"Bazaar-compatible discovery endpoint for x402 agent indexers.","operationId":"discovery_resources_v1_x402_discovery_resources_get","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}}}}},"/discovery/resources":{"get":{"summary":"Fetch Bazaar-compatible discovery catalog for x402 agents","description":"Bazaar-compatible discovery endpoint for x402 agent indexers.","operationId":"discovery_resources_discovery_resources_get","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}}}}},"/graph":{"get":{"summary":"Fetch competitive graph nodes, edges, and hub competitors","description":"Competitive Graph \u2014 mapa de relaciones entre competidores.\n\nSin par\u00e1metros: retorna el grafo completo con los nodos m\u00e1s analizados.\nCon ?company=Notion: retorna el subgrafo centrado en esa empresa.\n\nIncluye hub_competitors \u2014 empresas que aparecen m\u00e1s frecuentemente\ncomo competidores en m\u00faltiples an\u00e1lisis.","operationId":"competitive_graph_graph_get","parameters":[{"name":"company","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Company"}},{"name":"limit","in":"query","required":false,"schema":{"type":"integer","default":50,"title":"Limit"}}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/message/send":{"post":{"summary":"Send A2A protocol message and receive competitive analysis","description":"A2A Protocol \u2014 message/send endpoint.\nCompatible con LangGraph, CrewAI, AutoGen, Google ADK.\nAcepta mensajes A2A y retorna an\u00e1lisis competitivo estructurado.\nModo gratuito para descubrimiento \u2014 an\u00e1lisis b\u00e1sico sin pago.","operationId":"a2a_message_send_message_send_post","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/A2ASendRequest"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/intel":{"post":{"summary":"Analyze competitor URL or text \u2014 returns structured intelligence","description":"Single competitive intelligence analysis \u2014 0.05 USDC via x402.","operationId":"intel_intel_post","parameters":[{"name":"x-payment","in":"header","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"X-Payment"}}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/IntelRequest"}}}},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}},"402":{"description":"Payment Required \u2014 x402 payment challenge. Pay with USDC on Base or Solana mainnet and retry with X-PAYMENT header.","content":{"application/json":{"schema":{"type":"object","properties":{"x402Version":{"type":"integer"},"accepts":{"type":"array"},"error":{"type":"string"}}}}}}}}},"/batch":{"post":{"summary":"Analyze up to ten competitors in parallel via x402 payment","description":"Batch competitive intelligence \u2014 up to 10 items for 0.20 USDC via x402.","operationId":"batch_batch_post","parameters":[{"name":"x-payment","in":"header","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"X-Payment"}}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/BatchRequest"}}}},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}},"402":{"description":"Payment Required \u2014 x402 payment challenge. Pay with USDC on Base or Solana mainnet and retry with X-PAYMENT header.","content":{"application/json":{"schema":{"type":"object","properties":{"x402Version":{"type":"integer"},"accepts":{"type":"array"},"error":{"type":"string"}}}}}}}}},"/demo":{"post":{"summary":"Analyze competitor text free \u2014 demo limited to 300 characters","description":"Free demo \u2014 300 char text limit, no URL fetching. 3 calls per IP per hour.","operationId":"demo_demo_post","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/DemoRequest"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}}},"components":{"schemas":{"A2AMessage":{"properties":{"role":{"type":"string","title":"Role","default":"user"},"parts":{"items":{"$ref":"#/components/schemas/A2AMessagePart"},"type":"array","title":"Parts"},"messageId":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Messageid"},"contextId":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Contextid"},"taskId":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Taskid"}},"type":"object","required":["parts"],"title":"A2AMessage"},"A2AMessagePart":{"properties":{"type":{"type":"string","title":"Type","default":"text"},"text":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Text"}},"type":"object","title":"A2AMessagePart"},"A2ASendRequest":{"properties":{"message":{"$ref":"#/components/schemas/A2AMessage"}},"type":"object","required":["message"],"title":"A2ASendRequest"},"BatchItem":{"properties":{"url":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Url"},"text":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Text"},"context":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Context"},"id":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Id"},"mode":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Mode","default":"competitive"},"operator_id":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Operator Id"}},"type":"object","title":"BatchItem"},"BatchRequest":{"properties":{"items":{"items":{"$ref":"#/components/schemas/BatchItem"},"type":"array","maxItems":10,"minItems":1,"title":"Items"}},"type":"object","required":["items"],"title":"BatchRequest"},"DemoRequest":{"properties":{"text":{"type":"string","maxLength":300,"title":"Text"}},"type":"object","required":["text"],"title":"DemoRequest"},"HTTPValidationError":{"properties":{"detail":{"items":{"$ref":"#/components/schemas/ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"},"IntelRequest":{"properties":{"url":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Url"},"text":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Text"},"context":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Context"},"mode":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Mode","default":"competitive"},"operator_id":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Operator Id"}},"type":"object","title":"IntelRequest"},"MCPRequest":{"properties":{"jsonrpc":{"type":"string","title":"Jsonrpc","default":"2.0"},"id":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Id"},"method":{"type":"string","title":"Method","default":"initialize"},"params":{"anyOf":[{"type":"object"},{"type":"null"}],"title":"Params"}},"additionalProperties":true,"type":"object","title":"MCPRequest"},"ValidationError":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"}}}}
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Intelica",
+    "description": "Competitive intelligence API \u2014 pay-per-call via x402",
+    "version": "4.5.7"
+  },
+  "paths": {
+    "/llms.txt": {
+      "get": {
+        "summary": "Fetch llms.txt discovery file for LLM and agent integration",
+        "description": "Standard llms.txt for LLM and agent discovery.",
+        "operationId": "llms_txt_llms_txt_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Fetch service health and cache statistics",
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "summary": "Fetch Intelica API overview and available endpoints",
+        "operationId": "root__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/.well-known/x402": {
+      "get": {
+        "summary": "Fetch x402 payment manifest with Base and Solana options",
+        "operationId": "x402_manifest__well_known_x402_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/.well-known/x402.json": {
+      "get": {
+        "summary": "Fetch x402 payment manifest with Base and Solana options",
+        "operationId": "x402_manifest__well_known_x402_json_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pricing": {
+      "get": {
+        "summary": "Fetch pricing details for all Intelica endpoints",
+        "operationId": "pricing_pricing_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mcp": {
+      "get": {
+        "summary": "Fetch MCP server info and available tools",
+        "operationId": "mcp_info_mcp_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Execute MCP JSON-RPC tool call for competitive intelligence",
+        "description": "MCP server \u2014 JSON-RPC 2.0.",
+        "operationId": "mcp_endpoint_mcp_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MCPRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mcp-server-card.json": {
+      "get": {
+        "summary": "Fetch Intelica agent card for MCP server discovery",
+        "operationId": "agent_card_mcp_server_card_json_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agent-card.json": {
+      "get": {
+        "summary": "Fetch Intelica agent card for MCP server discovery",
+        "operationId": "agent_card_agent_card_json_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mcp/agentcard.json": {
+      "get": {
+        "summary": "Fetch Intelica agent card for MCP server discovery",
+        "operationId": "agent_card_mcp_agentcard_json_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/.well-known/agent-registration.json": {
+      "get": {
+        "summary": "Fetch agent registration metadata for discovery",
+        "operationId": "agent_registration__well_known_agent_registration_json_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/x402/discovery/resources": {
+      "get": {
+        "summary": "Fetch Bazaar-compatible discovery catalog for x402 agents",
+        "description": "Bazaar-compatible discovery endpoint for x402 agent indexers.",
+        "operationId": "discovery_resources_x402_discovery_resources_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/.well-known/x402/discovery/resources": {
+      "get": {
+        "summary": "Fetch Bazaar-compatible discovery catalog for x402 agents",
+        "description": "Bazaar-compatible discovery endpoint for x402 agent indexers.",
+        "operationId": "discovery_resources__well_known_x402_discovery_resources_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/x402/discovery/resources": {
+      "get": {
+        "summary": "Fetch Bazaar-compatible discovery catalog for x402 agents",
+        "description": "Bazaar-compatible discovery endpoint for x402 agent indexers.",
+        "operationId": "discovery_resources_v2_x402_discovery_resources_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/x402/discovery/resources": {
+      "get": {
+        "summary": "Fetch Bazaar-compatible discovery catalog for x402 agents",
+        "description": "Bazaar-compatible discovery endpoint for x402 agent indexers.",
+        "operationId": "discovery_resources_v1_x402_discovery_resources_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/discovery/resources": {
+      "get": {
+        "summary": "Fetch Bazaar-compatible discovery catalog for x402 agents",
+        "description": "Bazaar-compatible discovery endpoint for x402 agent indexers.",
+        "operationId": "discovery_resources_discovery_resources_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/graph": {
+      "get": {
+        "summary": "Fetch competitive graph nodes, edges, and hub competitors",
+        "description": "Competitive Graph \u2014 mapa de relaciones entre competidores.\n\nSin par\u00e1metros: retorna el grafo completo con los nodos m\u00e1s analizados.\nCon ?company=Notion: retorna el subgrafo centrado en esa empresa.\n\nIncluye hub_competitors \u2014 empresas que aparecen m\u00e1s frecuentemente\ncomo competidores en m\u00faltiples an\u00e1lisis.",
+        "operationId": "competitive_graph_graph_get",
+        "parameters": [
+          {
+            "name": "company",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Company"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 50,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/message/send": {
+      "post": {
+        "summary": "Send A2A protocol message and receive competitive analysis",
+        "description": "A2A Protocol \u2014 message/send endpoint.\nCompatible con LangGraph, CrewAI, AutoGen, Google ADK.\nAcepta mensajes A2A y retorna an\u00e1lisis competitivo estructurado.\nModo gratuito para descubrimiento \u2014 an\u00e1lisis b\u00e1sico sin pago.",
+        "operationId": "a2a_message_send_message_send_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/A2ASendRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/intel": {
+      "post": {
+        "summary": "Analyze competitor URL or text \u2014 returns structured intelligence",
+        "description": "Single competitive intelligence analysis \u2014 0.05 USDC via x402.",
+        "operationId": "intel_intel_post",
+        "parameters": [
+          {
+            "name": "x-payment",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Payment"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IntelRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required \u2014 x402 payment challenge. Pay with USDC on Base or Solana mainnet and retry with X-PAYMENT header.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "x402Version": {
+                      "type": "integer"
+                    },
+                    "accepts": {
+                      "type": "array"
+                    },
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/batch": {
+      "post": {
+        "summary": "Analyze up to ten competitors in parallel via x402 payment",
+        "description": "Batch competitive intelligence \u2014 up to 10 items for 0.20 USDC via x402.",
+        "operationId": "batch_batch_post",
+        "parameters": [
+          {
+            "name": "x-payment",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Payment"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BatchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required \u2014 x402 payment challenge. Pay with USDC on Base or Solana mainnet and retry with X-PAYMENT header.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "x402Version": {
+                      "type": "integer"
+                    },
+                    "accepts": {
+                      "type": "array"
+                    },
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/demo": {
+      "post": {
+        "summary": "Analyze competitor text free \u2014 demo limited to 300 characters",
+        "description": "Free demo \u2014 300 char text limit, no URL fetching. 3 calls per IP per hour.",
+        "operationId": "demo_demo_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DemoRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "A2AMessage": {
+        "properties": {
+          "role": {
+            "type": "string",
+            "title": "Role",
+            "default": "user"
+          },
+          "parts": {
+            "items": {
+              "$ref": "#/components/schemas/A2AMessagePart"
+            },
+            "type": "array",
+            "title": "Parts"
+          },
+          "messageId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Messageid"
+          },
+          "contextId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Contextid"
+          },
+          "taskId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Taskid"
+          }
+        },
+        "type": "object",
+        "required": [
+          "parts"
+        ],
+        "title": "A2AMessage"
+      },
+      "A2AMessagePart": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Type",
+            "default": "text"
+          },
+          "text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Text"
+          }
+        },
+        "type": "object",
+        "title": "A2AMessagePart"
+      },
+      "A2ASendRequest": {
+        "properties": {
+          "message": {
+            "$ref": "#/components/schemas/A2AMessage"
+          }
+        },
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "title": "A2ASendRequest"
+      },
+      "BatchItem": {
+        "properties": {
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Url"
+          },
+          "text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Text"
+          },
+          "context": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Context"
+          },
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Id"
+          },
+          "mode": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mode",
+            "default": "competitive"
+          },
+          "operator_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Operator Id"
+          }
+        },
+        "type": "object",
+        "title": "BatchItem"
+      },
+      "BatchRequest": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/BatchItem"
+            },
+            "type": "array",
+            "maxItems": 10,
+            "minItems": 1,
+            "title": "Items"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "title": "BatchRequest"
+      },
+      "DemoRequest": {
+        "properties": {
+          "text": {
+            "type": "string",
+            "maxLength": 300,
+            "title": "Text"
+          }
+        },
+        "type": "object",
+        "required": [
+          "text"
+        ],
+        "title": "DemoRequest"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "IntelRequest": {
+        "properties": {
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Url"
+          },
+          "text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Text"
+          },
+          "context": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Context"
+          },
+          "mode": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mode",
+            "default": "competitive"
+          },
+          "operator_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Operator Id"
+          }
+        },
+        "type": "object",
+        "title": "IntelRequest"
+      },
+      "MCPRequest": {
+        "properties": {
+          "jsonrpc": {
+            "type": "string",
+            "title": "Jsonrpc",
+            "default": "2.0"
+          },
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Id"
+          },
+          "method": {
+            "type": "string",
+            "title": "Method",
+            "default": "initialize"
+          },
+          "params": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Params"
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "title": "MCPRequest"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.intelica.dev"
+    }
+  ]
+}
