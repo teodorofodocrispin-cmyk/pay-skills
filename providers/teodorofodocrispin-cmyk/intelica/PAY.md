@@ -4,7 +4,7 @@ title: "Intelica"
 description: "Competitive intelligence API for AI agents. Analyzes any URL or company description and returns structured JSON with market positioning, user pain points, detected competitors, and unique market angles. Pay-per-call via x402 on Base and Solana mainnet."
 use_case: "Use when an AI agent needs to analyze a competitor, evaluate market positioning, identify user pain points, or discover differentiation opportunities for any product or company. Returns structured JSON ready for downstream agent reasoning."
 category: ai_ml
-service_url: https://intelica.onrender.com
+service_url: https://api.intelica.dev
 openapi:
   path: openapi.json
 ---
