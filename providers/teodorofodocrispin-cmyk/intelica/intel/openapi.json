@@ -1,7 +1,7 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Intelica — Competitive Intelligence API",
+    "title": "Intelica \u2014 Competitive Intelligence API",
     "description": "Competitive intelligence API for autonomous AI agents. Pay-per-call via x402 on Solana mainnet ($0.05 USDC standard / $1.00 USDC elite). No accounts, no API keys.",
     "version": "4.5.6",
     "contact": {
@@ -26,7 +26,9 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["text"],
+                "required": [
+                  "text"
+                ],
                 "properties": {
                   "text": {
                     "type": "string",
@@ -34,7 +36,19 @@
                   },
                   "mode": {
                     "type": "string",
-                    "enum": ["competitive", "fundraising", "partnership", "acquisition", "market_entry", "crypto_protocol", "venture_screening", "market_entry_execution", "regulatory_compliance", "risk_assessment", "sales_enablement"],
+                    "enum": [
+                      "competitive",
+                      "fundraising",
+                      "partnership",
+                      "acquisition",
+                      "market_entry",
+                      "crypto_protocol",
+                      "venture_screening",
+                      "market_entry_execution",
+                      "regulatory_compliance",
+                      "risk_assessment",
+                      "sales_enablement"
+                    ],
                     "default": "competitive",
                     "description": "Analysis mode. Standard ($0.05): competitive, fundraising, partnership, acquisition, market_entry, crypto_protocol. Elite ($1.00): venture_screening, market_entry_execution, regulatory_compliance, risk_assessment, sales_enablement."
                   },
@@ -70,7 +84,13 @@
                       "properties": {
                         "action": {
                           "type": "string",
-                          "enum": ["enter", "avoid", "monitor", "acquire", "partner"]
+                          "enum": [
+                            "enter",
+                            "avoid",
+                            "monitor",
+                            "acquire",
+                            "partner"
+                          ]
                         },
                         "confidence_score": {
                           "type": "number",
@@ -82,7 +102,11 @@
                         },
                         "risk_level": {
                           "type": "string",
-                          "enum": ["high", "medium", "low"]
+                          "enum": [
+                            "high",
+                            "medium",
+                            "low"
+                          ]
                         }
                       }
                     },
@@ -94,17 +118,25 @@
                     },
                     "detected_competitors": {
                       "type": "array",
-                      "items": {"type": "string"}
+                      "items": {
+                        "type": "string"
+                      }
                     },
                     "execution_plan": {
                       "type": "object",
                       "properties": {
-                        "non_obvious_insight": {"type": "string"},
+                        "non_obvious_insight": {
+                          "type": "string"
+                        },
                         "week_1_actions": {
                           "type": "array",
-                          "items": {"type": "string"}
+                          "items": {
+                            "type": "string"
+                          }
                         },
-                        "budget_guidance": {"type": "object"}
+                        "budget_guidance": {
+                          "type": "object"
+                        }
                       }
                     },
                     "auto_executed": {
@@ -118,25 +150,36 @@
                   "decision_recommendation": {
                     "action": "avoid",
                     "confidence_score": 0.88,
-                    "rationale": "IMI 0.82 exceeds avoid threshold — Stripe developer ecosystem lock-in creates unassailable moat",
+                    "rationale": "IMI 0.82 exceeds avoid threshold \u2014 Stripe developer ecosystem lock-in creates unassailable moat",
                     "risk_level": "high"
                   },
                   "intelica_moat_index": 0.82,
-                  "detected_competitors": ["Stripe", "Adyen", "2C2P"],
+                  "detected_competitors": [
+                    "Stripe",
+                    "Adyen",
+                    "2C2P"
+                  ],
                   "execution_plan": {
                     "non_obvious_insight": "The exploitable gap is local payment method coverage (<40% merchant penetration in SEA), not the API layer where Stripe dominates",
-                    "week_1_actions": ["Map Stripe merchant penetration by country", "Identify local payment method coverage gaps"],
-                    "budget_guidance": {"phase_1_usd": "$2.5M-$4M"}
+                    "week_1_actions": [
+                      "Map Stripe merchant penetration by country",
+                      "Identify local payment method coverage gaps"
+                    ],
+                    "budget_guidance": {
+                      "phase_1_usd": "$2.5M-$4M"
+                    }
                   }
                 }
               }
             }
           },
           "402": {
-            "description": "Payment required — x402 challenge with Solana mainnet payment details",
+            "description": "Payment required \u2014 x402 challenge with Solana mainnet payment details",
             "headers": {
               "PAYMENT-REQUIRED": {
-                "schema": {"type": "string"},
+                "schema": {
+                  "type": "string"
+                },
                 "description": "Base64-encoded x402 v2 payment payload"
               }
             }
@@ -145,9 +188,12 @@
         "x-payment": {
           "protocol": "x402",
           "version": 2,
-          "networks": ["solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp", "eip155:8453"],
+          "networks": [
+            "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+            "eip155:8453"
+          ],
           "standard_price_usdc": 0.05,
-          "elite_price_usdc": 1.00
+          "elite_price_usdc": 1.0
         }
       }
     },
@@ -162,17 +208,26 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["items"],
+                "required": [
+                  "items"
+                ],
                 "properties": {
                   "items": {
                     "type": "array",
                     "maxItems": 10,
                     "items": {
                       "type": "object",
-                      "required": ["text"],
+                      "required": [
+                        "text"
+                      ],
                       "properties": {
-                        "text": {"type": "string"},
-                        "mode": {"type": "string", "default": "competitive"}
+                        "text": {
+                          "type": "string"
+                        },
+                        "mode": {
+                          "type": "string",
+                          "default": "competitive"
+                        }
                       }
                     }
                   }
@@ -191,7 +246,9 @@
                   "properties": {
                     "results": {
                       "type": "array",
-                      "items": {"type": "object"}
+                      "items": {
+                        "type": "object"
+                      }
                     }
                   }
                 }
@@ -199,13 +256,13 @@
             }
           },
           "402": {
-            "description": "Payment required — $0.20 USDC on Solana mainnet"
+            "description": "Payment required \u2014 $0.20 USDC on Solana mainnet"
           }
         },
         "x-payment": {
           "protocol": "x402",
           "version": 2,
-          "price_usdc": 0.20
+          "price_usdc": 0.2
         }
       }
     },
@@ -221,7 +278,19 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["ai", "fintech", "healthcare", "saas", "defense", "logistics", "legaltech", "edtech", "robotics", "energy", "ecommerce"]
+              "enum": [
+                "ai",
+                "fintech",
+                "healthcare",
+                "saas",
+                "defense",
+                "logistics",
+                "legaltech",
+                "edtech",
+                "robotics",
+                "energy",
+                "ecommerce"
+              ]
             }
           }
         ],
@@ -230,7 +299,9 @@
             "description": "Market saturation data for the sector",
             "content": {
               "application/json": {
-                "schema": {"type": "object"}
+                "schema": {
+                  "type": "object"
+                }
               }
             }
           }
