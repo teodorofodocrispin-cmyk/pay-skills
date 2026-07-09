@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Intelica",
-    "description": "Competitive intelligence API — pay-per-call via x402",
+    "description": "Competitive intelligence API \u2014 pay-per-call via x402",
     "version": "4.5.7"
   },
   "paths": {
@@ -120,7 +120,7 @@
       },
       "post": {
         "summary": "Execute MCP JSON-RPC tool call for competitive intelligence",
-        "description": "MCP server — JSON-RPC 2.0.",
+        "description": "MCP server \u2014 JSON-RPC 2.0.",
         "operationId": "mcp_endpoint_mcp_post",
         "requestBody": {
           "content": {
@@ -306,7 +306,7 @@
     "/graph": {
       "get": {
         "summary": "Fetch competitive graph nodes, edges, and hub competitors",
-        "description": "Competitive Graph — mapa de relaciones entre competidores.\n\nSin parámetros: retorna el grafo completo con los nodos más analizados.\nCon ?company=Notion: retorna el subgrafo centrado en esa empresa.\n\nIncluye hub_competitors — empresas que aparecen más frecuentemente\ncomo competidores en múltiples análisis.",
+        "description": "Competitive Graph \u2014 mapa de relaciones entre competidores.\n\nSin par\u00e1metros: retorna el grafo completo con los nodos m\u00e1s analizados.\nCon ?company=Notion: retorna el subgrafo centrado en esa empresa.\n\nIncluye hub_competitors \u2014 empresas que aparecen m\u00e1s frecuentemente\ncomo competidores en m\u00faltiples an\u00e1lisis.",
         "operationId": "competitive_graph_graph_get",
         "parameters": [
           {
@@ -361,7 +361,7 @@
     "/message/send": {
       "post": {
         "summary": "Send A2A protocol message and receive competitive analysis",
-        "description": "A2A Protocol — message/send endpoint.\nCompatible con LangGraph, CrewAI, AutoGen, Google ADK.\nAcepta mensajes A2A y retorna análisis competitivo estructurado.\nModo gratuito para descubrimiento — análisis básico sin pago.",
+        "description": "A2A Protocol \u2014 message/send endpoint.\nCompatible con LangGraph, CrewAI, AutoGen, Google ADK.\nAcepta mensajes A2A y retorna an\u00e1lisis competitivo estructurado.\nModo gratuito para descubrimiento \u2014 an\u00e1lisis b\u00e1sico sin pago.",
         "operationId": "a2a_message_send_message_send_post",
         "requestBody": {
           "content": {
@@ -398,7 +398,7 @@
     "/intel": {
       "post": {
         "summary": "Analyze competitor URL or text - returns structured intelligenc",
-        "description": "Single competitive intelligence analysis — 0.05 USDC via x402.",
+        "description": "Single competitive intelligence analysis \u2014 0.05 USDC via x402.",
         "operationId": "intel_intel_post",
         "parameters": [
           {
@@ -448,7 +448,7 @@
             }
           },
           "402": {
-            "description": "Payment Required — x402 payment challenge. Pay with USDC on Base or Solana mainnet and retry with X-PAYMENT header.",
+            "description": "Payment Required \u2014 x402 payment challenge. Pay with USDC on Base or Solana mainnet and retry with X-PAYMENT header.",
             "content": {
               "application/json": {
                 "schema": {
@@ -474,7 +474,7 @@
     "/batch": {
       "post": {
         "summary": "Analyze up to ten competitors in parallel via x402 payment",
-        "description": "Batch competitive intelligence — up to 10 items for 0.20 USDC via x402.",
+        "description": "Batch competitive intelligence \u2014 up to 10 items for 0.20 USDC via x402.",
         "operationId": "batch_batch_post",
         "parameters": [
           {
@@ -524,7 +524,7 @@
             }
           },
           "402": {
-            "description": "Payment Required — x402 payment challenge. Pay with USDC on Base or Solana mainnet and retry with X-PAYMENT header.",
+            "description": "Payment Required \u2014 x402 payment challenge. Pay with USDC on Base or Solana mainnet and retry with X-PAYMENT header.",
             "content": {
               "application/json": {
                 "schema": {
@@ -550,7 +550,7 @@
     "/demo": {
       "post": {
         "summary": "Analyze competitor text free - demo limited to 300 characters",
-        "description": "Free demo — 300 char text limit, no URL fetching. 3 calls per IP per hour.",
+        "description": "Free demo \u2014 300 char text limit, no URL fetching. 3 calls per IP per hour.",
         "operationId": "demo_demo_post",
         "requestBody": {
           "content": {
